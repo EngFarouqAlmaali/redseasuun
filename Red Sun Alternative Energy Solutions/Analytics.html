@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الإحصائيات المتقدم | Advanced Analytics System</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/Analytics.css">
+</head>
+<body>
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" class="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">جاري تحميل البيانات...</div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard fade-in">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>لوحة التحكم</h1>
+                <p>نظام الإحصائيات المتقدم</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>الإحصائيات</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>المستخدمون</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-tasks"></i>
+                    <span>المهام</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-bell"></i>
+                    <span>التنبيهات</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>التقارير</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>الإعدادات</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div>
+                    <h1 class="page-title">لوحة الإحصائيات الرئيسية</h1>
+                </div>
+                <div class="top-controls">
+                    <button id="refreshData" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> تحديث البيانات
+                    </button>
+                    <button id="exportData" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> تصدير
+                    </button>
+                    <button id="toggleTheme" class="btn btn-outline">
+                        <i class="fas fa-moon" id="theme-icon"></i> <span id="theme-text">الوضع النهاري</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid slide-up">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">إجمالي المستخدمين</div>
+                        </div>
+                        <div class="stat-icon teal">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div id="totalUsers" class="stat-value">0</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 75% هذا الشهر
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">المهام المكتملة</div>
+                        </div>
+                        <div class="stat-icon blue">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                    <div id="completedTasks" class="stat-value">758</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 25% هذا الأسبوع
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">معدل الإنجاز</div>
+                        </div>
+                        <div class="stat-icon pink">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div id="completionRate" class="stat-value">7.25</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 35% تحسن
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">العملاء النشطون</div>
+                        </div>
+                        <div class="stat-icon purple">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                    </div>
+                    <div id="activeUsers" class="stat-value">35K</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 68% زيادة
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section slide-up">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div>
+                            <h3 class="chart-title">ملخص الموقع</h3>
+                            <p class="chart-subtitle">14-27 مارس 2024</p>
+                        </div>
+                    </div>
+                    <div class="chart-canvas">
+                        <canvas id="websiteChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">معدل التحويل</h3>
+                    </div>
+                    <div class="chart-value">
+                        <div class="chart-main-value">35%</div>
+                        <div class="chart-percentage">+12% عن الشهر الماضي</div>
+                    </div>
+                    <div class="chart-canvas" style="height: 150px;">
+                        <canvas id="conversionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Cards -->
+            <div class="cards-section slide-up">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">الأرباح الشهرية</h3>
+                        <p class="card-description">إجمالي الأرباح لهذا الشهر</p>
+                    </div>
+                    <div class="chart-canvas" style="height: 200px;">
+                        <canvas id="earningsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">أداء المشاريع</h3>
+                        <p class="card-description">حالة المشاريع الحالية</p>
+                    </div>
+                    <div class="chart-canvas" style="height: 200px;">
+                        <canvas id="projectsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">نشاط المستخدمين</h3>
+                        <p class="card-description">توزيع النشاط خلال الأسبوع</p>
+                    </div>
+                    <div class="chart-canvas" style="height: 200px;">
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="js/Analytics.js"></script>
+    <script src="js/ascii.js"></script>
+    <script src="db/analytics_db.js"></script>
+</body>
+</html>
+            

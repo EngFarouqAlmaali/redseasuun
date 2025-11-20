@@ -1,0 +1,907 @@
+/* متغيرات الألوان الفخمة */
+:root {
+    --primary-blue: #0066cc;
+    --royal-blue: #003d80;
+    --gold: #ffd700;
+    --gold-dark: #cc9900;
+    --gold-light: #fff5cc;
+    --pure-white: #ffffff;
+    --off-white: #f8f9fa;
+    --charcoal: #1a1a1a;
+    --black: #000000;
+    --silver: #c0c0c0;
+    --text-dark: #2c3e50;
+    --text-light: #ecf0f1;
+    --gradient-primary: linear-gradient(135deg, #0066cc 0%, #003d80 100%);
+    --gradient-gold: linear-gradient(135deg, #ffd700 0%, #cc9900 100%);
+    --gradient-luxury: linear-gradient(135deg, #003d80 0%, #0066cc 50%, #ffd700 100%);
+    --shadow-gold: 0 8px 32px rgba(255, 215, 0, 0.3);
+    --shadow-blue: 0 8px 32px rgba(0, 102, 204, 0.3);
+    --shadow-elegant: 0 15px 35px rgba(0, 0, 0, 0.1);
+    --border-radius: 16px;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(0, 102, 204, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(0, 61, 128, 0.03) 0%, transparent 50%);
+    z-index: -1;
+    animation: backgroundMove 20s ease-in-out infinite;
+}
+
+@keyframes backgroundMove {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(2deg); }
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* الرأس الفخم */
+header {
+    background: var(--gradient-luxury);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow-elegant);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        transparent 30%, 
+        transparent 70%, 
+        rgba(255, 215, 0, 0.1) 100%);
+    animation: headerShimmer 3s ease-in-out infinite;
+}
+
+@keyframes headerShimmer {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+header .logo i {
+    font-size: 3rem;
+    color: var(--gold);
+    text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    animation: logoGlow 2s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); }
+    50% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
+}
+
+header .logo h1 {
+    color: var(--pure-white);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+}
+
+header .controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* الأزرار الفخمة */
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    transition: all 0.6s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--pure-white);
+    border: 2px solid transparent;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-blue);
+    border-color: var(--gold);
+}
+
+.btn-accent {
+    background: var(--gradient-gold);
+    color: var(--charcoal);
+    border: 2px solid transparent;
+}
+
+.btn-accent:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-gold);
+    border-color: var(--royal-blue);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: var(--pure-white);
+}
+
+/* إحصائيات فخمة */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: var(--pure-white);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-elegant);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.stat-card:hover::before {
+    left: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    background: var(--gradient-luxury);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.stat-title {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* لوحة التحكم */
+.dashboard {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* الشريط الجانبي الفخم */
+.sidebar {
+    background: var(--pure-white);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-elegant);
+    border: 1px solid rgba(0, 102, 204, 0.1);
+    position: sticky;
+    top: 2rem;
+}
+
+.sidebar h2 {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 0.5rem;
+}
+
+.filter-btn:hover {
+    background: rgba(0, 102, 204, 0.05);
+    border-color: rgba(0, 102, 204, 0.2);
+    transform: translateX(5px);
+}
+
+.filter-btn.active {
+    background: var(--gradient-primary);
+    color: var(--pure-white);
+    box-shadow: var(--shadow-blue);
+    border-color: var(--gold);
+}
+
+/* البطاقات الفخمة */
+.card {
+    background: var(--pure-white);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-elegant);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: var(--gradient-luxury);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.card-title {
+    color: var(--pure-white);
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* نموذج المهمة الفخم */
+.task-form {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: 2px solid rgba(0, 102, 204, 0.2);
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 1rem;
+    background: var(--pure-white);
+    color: var(--text-dark);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+    transform: translateY(-2px);
+}
+
+/* أزرار الأولوية الفخمة */
+.priority-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.priority-btn {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.priority-high {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: var(--pure-white);
+}
+
+.priority-medium {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+    color: var(--charcoal);
+}
+
+.priority-low {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    color: var(--pure-white);
+}
+
+.priority-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.priority-btn.active {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
+
+/* عنصر المهمة الفخم */
+.tasks-container {
+    padding: 2rem;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: var(--pure-white);
+    border: 1px solid rgba(0, 102, 204, 0.1);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.task-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--gradient-gold);
+    transition: var(--transition);
+}
+
+.task-item:hover {
+    transform: translateX(10px);
+    box-shadow: var(--shadow-elegant);
+    border-color: var(--gold);
+}
+
+.task-item:hover::before {
+    width: 8px;
+}
+
+.task-item.completed {
+    opacity: 0.7;
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(32, 201, 151, 0.05) 100%);
+}
+
+.task-content {
+    flex: 1;
+}
+
+.task-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.task-description {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.task-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.task-priority {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--pure-white);
+}
+
+/* أزرار الإجراءات الفخمة */
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.complete-btn {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: var(--pure-white);
+}
+
+.edit-btn {
+    background: var(--gradient-primary);
+    color: var(--pure-white);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: var(--pure-white);
+}
+
+.action-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* الإشعارات الفخمة */
+.notification-container {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.notification {
+    background: var(--pure-white);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-elegant);
+    border-left: 5px solid;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    min-width: 350px;
+    animation: slideInRight 0.4s ease;
+    backdrop-filter: blur(20px);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification.success {
+    border-left-color: #28a745;
+}
+
+.notification.error {
+    border-left-color: #dc3545;
+}
+
+.notification.warning {
+    border-left-color: #ffc107;
+}
+
+.notification.info {
+    border-left-color: var(--primary-blue);
+}
+
+.notification i {
+    font-size: 1.5rem;
+    margin-top: 0.25rem;
+}
+
+.notification.success i {
+    color: #28a745;
+}
+
+.notification.error i {
+    color: #dc3545;
+}
+
+.notification.warning i {
+    color: #ffc107;
+}
+
+.notification.info i {
+    color: var(--primary-blue);
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: var(--text-dark);
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #6c757d;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.notification-close:hover {
+    color: var(--charcoal);
+    transform: scale(1.1);
+}
+
+/* زر الوضع الليلي الفخم */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: var(--gradient-luxury);
+    color: var(--pure-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-elegant);
+    z-index: 1000;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* الوضع الليلي المحسّن - إصلاح النصوص */
+.dark-mode {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    color: var(--text-light);
+}
+
+.dark-mode::before {
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 102, 204, 0.08) 0%, transparent 50%);
+}
+
+.dark-mode .card,
+.dark-mode .sidebar,
+.dark-mode .stat-card,
+.dark-mode .task-item,
+.dark-mode .notification {
+    background: rgba(30, 30, 35, 0.95);
+    backdrop-filter: blur(20px);
+    border-color: rgba(255, 215, 0, 0.2);
+}
+
+.dark-mode .form-control {
+    background: rgba(20, 20, 25, 0.95);
+    border-color: rgba(255, 215, 0, 0.3);
+    color: var(--text-light);
+}
+
+.dark-mode .form-control::placeholder {
+    color: rgba(236, 240, 241, 0.5);
+}
+
+.dark-mode .form-group label {
+    color: var(--text-light);
+}
+
+.dark-mode .task-title {
+    color: var(--text-light);
+}
+
+.dark-mode .task-description {
+    color: rgba(236, 240, 241, 0.7);
+}
+
+.dark-mode .task-meta {
+    color: rgba(236, 240, 241, 0.6);
+}
+
+.dark-mode .notification-title {
+    color: var(--text-light);
+}
+
+.dark-mode .notification-content > div:last-child {
+    color: rgba(236, 240, 241, 0.8);
+}
+
+.dark-mode .stat-title {
+    color: var(--text-light);
+}
+
+.dark-mode .filter-btn {
+    color: var(--text-light);
+}
+
+.dark-mode .filter-btn:hover {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.dark-mode .empty-state h3,
+.dark-mode .loading-state p {
+    color: var(--text-light);
+}
+
+.dark-mode .empty-state p {
+    color: rgba(236, 240, 241, 0.6);
+}
+
+/* التذييل الفخم */
+footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+    background: linear-gradient(135deg, rgba(0, 61, 128, 0.05) 0%, rgba(255, 215, 0, 0.05) 100%);
+    backdrop-filter: blur(10px);
+}
+
+footer p {
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+.dark-mode footer p {
+    color: rgba(236, 240, 241, 0.6);
+}
+
+/* حالة التحميل */
+.loading-state {
+    text-align: center;
+    padding: 3rem;
+}
+
+.loading-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--primary-blue);
+}
+
+/* حالة عدم وجود بيانات */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--silver);
+}
+
+.empty-state h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+}
+
+.empty-state p {
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+/* شريط التمرير المخصص */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-gold);
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gradient-primary);
+    background-clip: content-box;
+}
+
+/* تأثيرات التركيز المحسنة */
+*:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* الاستجابة للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .dashboard {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .sidebar {
+        position: static;
+    }
+    
+    .stats {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    
+    header .logo h1 {
+        font-size: 1.8rem;
+    }
+    
+    .priority-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .task-item {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .task-actions {
+        align-self: flex-end;
+    }
+    
+    .notification-container {
+        right: 1rem;
+        left: 1rem;
+    }
+    
+    .notification {
+        min-width: auto;
+    }
+}
+
+/* تحسينات الإمكانية الوصول */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

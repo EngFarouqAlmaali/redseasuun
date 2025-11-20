@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/forgetpass.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAS - Reset Password</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+   <link rel="icon" href="logo_icon.ico">
+</head>
+<body class="light-theme" id="body">
+    <div class="language-selector">
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="current-lang">
+                <i class="fas fa-globe"></i>
+                <span id="currentLang">English</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="lang-menu" id="langMenu">
+                <div class="lang-item" data-lang="en">English</div>
+                <div class="lang-item" data-lang="ar">العربية</div>
+                <div class="lang-item" data-lang="fr">Français</div>
+                <div class="lang-item" data-lang="es">Español</div>
+                <div class="lang-item" data-lang="de">Deutsch</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun" id="themeIcon"></i>
+    </div>
+
+    <div class="container">
+        <div class="auth-wrapper">
+            <a href="signin.html" class="back-button" id="backButton">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+
+            <div class="logo">
+                <div class="logo-img">
+                    <span class="logo-text">RAS</span>
+                </div>
+                <div class="company-name" id="companyName">Red Sea Alternative Energy</div>
+            </div>
+
+            <div class="page-header">
+                <h1 class="page-title" id="pageTitle">Reset Password</h1>
+                <p class="page-description" id="pageDescription">
+                    Enter your email address and we'll send you a link to reset your password.
+                </p>
+            </div>
+
+            <div class="form-steps">
+                <!-- Step 1: Email Input -->
+                <div class="step active" id="emailStep">
+                    <form id="resetForm">
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <i class="input-icon fas fa-envelope"></i>
+                                <input type="email" class="form-input" id="resetEmail" placeholder="Enter your email address" required>
+                            </div>
+                            <span class="error-message" id="emailError" style="display: none;"></span>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="resetBtn">
+                            <i class="fas fa-spinner btn-spinner"></i>
+                            <span class="btn-text">
+                                <i class="fas fa-paper-plane"></i>
+                                <span id="resetBtnText">Send Reset Link</span>
+                            </span>
+                        </button>
+                    </form>
+
+                    <div class="text-center">
+                        <a href="signin.html" class="back-to-login" id="backToLoginLink">
+                            <i class="fas fa-arrow-left"></i>
+                            <span id="backToLoginText">Back to Login</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Step 2: Success Message -->
+                <div class="step" id="successStep">
+                    <div class="success-step">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h2 class="success-title" id="successTitle">Email Sent!</h2>
+                        <p class="success-description" id="successDescription">
+                            We've sent a password reset link to your email address. 
+                            Please check your inbox and follow the instructions to reset your password.
+                        </p>
+                        <a href="signin.html" class="back-to-login" id="backToLoginLink2">
+                            <i class="fas fa-arrow-left"></i>
+                            <span id="backToLoginText2">Back to Login</span>
+                        </a>
+
+                        <div class="resend-timer" id="resendTimer">
+                            <span id="resendText">Didn't receive the email?</span>
+                            <span class="resend-link" id="resendLink" style="display: none;">Resend</span>
+                            <span id="countdown">Resend in <span id="timer">60</span>s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/forgetpass.js" defer></script>
+</body>
+</html>

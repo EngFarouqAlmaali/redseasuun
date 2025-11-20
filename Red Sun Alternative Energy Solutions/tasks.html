@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المهام</title>
+    <link rel="icon" href="logo_icon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/task.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-tasks"></i>
+                <h1>نظام إدارة المهام</h1>
+            </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="showNotification('success', 'تم تحميل التطبيق بنجاح')">
+                    <i class="fas fa-bell"></i> تجربة الإشعارات
+                </button>
+                <button class="btn btn-accent" onclick="addSampleTasks()">
+                    <i class="fas fa-plus"></i> إضافة مهام تجريبية
+                </button>
+            </div>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <i class="fas fa-tasks stat-icon" style="color: var(--accent);"></i>
+                <div class="stat-number" id="total-tasks">0</div>
+                <div class="stat-title">إجمالي المهام</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-check-circle stat-icon" style="color: var(--success);"></i>
+                <div class="stat-number" id="completed-tasks">0</div>
+                <div class="stat-title">المهام المكتملة</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock stat-icon" style="color: var(--warning);"></i>
+                <div class="stat-number" id="pending-tasks">0</div>
+                <div class="stat-title">المهام المعلقة</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-exclamation-triangle stat-icon" style="color: var(--secondary);"></i>
+                <div class="stat-number" id="high-priority-tasks">0</div>
+                <div class="stat-title">مهمة عالية الأولوية</div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="sidebar">
+                <h2 style="margin-bottom: 20px; color: var(--primary);">التصفية والبحث</h2>
+                <div class="filters">
+                    <button class="filter-btn active" onclick="setFilter('all')">
+                        <i class="fas fa-list"></i> جميع المهام
+                    </button>
+                    <button class="filter-btn" onclick="setFilter('completed')">
+                        <i class="fas fa-check-circle"></i> المكتملة
+                    </button>
+                    <button class="filter-btn" onclick="setFilter('active')">
+                        <i class="fas fa-clock"></i> قيد التنفيذ
+                    </button>
+                    <button class="filter-btn" onclick="setFilter('high')">
+                        <i class="fas fa-exclamation-triangle"></i> عالية الأولوية
+                    </button>
+                    <button class="filter-btn" onclick="setFilter('medium')">
+                        <i class="fas fa-minus-circle"></i> متوسطة الأولوية
+                    </button>
+                    <button class="filter-btn" onclick="setFilter('low')">
+                        <i class="fas fa-arrow-down"></i> منخفضة الأولوية
+                    </button>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label>بحث سريع</label>
+                        <input type="text" class="form-control" placeholder="ابحث في المهام..." oninput="searchTasks(this.value)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-plus-circle"></i> إضافة مهمة جديدة</h2>
+                    </div>
+                    <div class="task-form">
+                        <div class="form-group">
+                            <label for="task-title">عنوان المهمة</label>
+                            <input type="text" id="task-title" class="form-control" placeholder="أدخل عنوان المهمة">
+                        </div>
+                        <div class="form-group">
+                            <label for="task-description">وصف المهمة (اختياري)</label>
+                            <textarea id="task-description" class="form-control" placeholder="أدخل وصف المهمة" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-due-date">تاريخ الاستحقاق</label>
+                            <input type="date" id="task-due-date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>مستوى الأولوية</label>
+                            <div class="priority-buttons">
+                                <button type="button" class="priority-btn priority-high" onclick="setPriority('high')">عالي</button>
+                                <button type="button" class="priority-btn priority-medium active" onclick="setPriority('medium')">متوسط</button>
+                                <button type="button" class="priority-btn priority-low" onclick="setPriority('low')">منخفض</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" style="margin-top: 20px; width: 100%;" onclick="addTask()">
+                        <i class="fas fa-plus"></i> إضافة المهمة
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-tasks"></i> قائمة المهام</h2>
+                        <div>
+                            <button class="btn btn-primary" onclick="loadTasks()">
+                                <i class="fas fa-sync-alt"></i> تحديث
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tasks-container" id="tasks-list">
+                        <div class="empty-state">
+                            <i class="fas fa-clipboard-list"></i>
+                            <h3>لا توجد مهام لعرضها</h3>
+                            <p>ابدأ بإضافة مهمة جديدة باستخدام النموذج أعلاه</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>جيع الحقوق محفوظه &copy;|شركه شمس البحر الاحمر لحلول الطاقه البديله </p>
+        </footer>
+    </div>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i>
+    </button>
+    <div class="notification-container" id="notification-container"></div>
+     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="js/task.js">  </script>
+    <script src="js/ascii.js"></script>
+    <script src="db/task_db.js"></script>
+</body>
+</html>
